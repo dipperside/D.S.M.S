@@ -11,7 +11,8 @@ Postgres == 10
 
 - Создать файл local_settings.py и прописать
 
-```from .settings import *
+```
+from .settings import *
 
 SECRET_KEY = 'ddfdrrt545*^g*&76r*B8f^5e64d9y&()HJ0yu97T&%%7t'
 
