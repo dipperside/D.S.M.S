@@ -1,6 +1,16 @@
 from django.contrib import admin
 
-from .models import Post
+from backend.news.models import Post
+from backend.news.forms import PostAdminForm
 
 
-admin.site.register(Post)
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+
+    model = Post
+    form = PostAdminForm
+    
+    list_display = ["title", "author", "created", "published"]
+    list_editable = ["published"]
+    search_fields = ["title"]
+    list_filter = ['author', "published"]

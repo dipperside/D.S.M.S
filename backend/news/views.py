@@ -1,5 +1,4 @@
 from django.http import Http404, HttpResponse
-from django.shortcuts import render
 from django.contrib.sites.shortcuts import get_current_site
 from django.views.generic.base import View
 
