@@ -4,6 +4,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.db import models
+from django.urls import reverse
 
 from DSMS.utils import unique_slug_generator
 
@@ -29,9 +30,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    # def get_absolute_url(self):
-    #     return reverse("news:story_list")
+    def get_absolute_url(self):
+        return reverse("news:post_detail", kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
-        self.slug = unique_slug_generator(self, Post, self.title)
+        self.slug = unique_slug_generator(self, self.title)
         super(Post, self).save(*args, **kwargs)

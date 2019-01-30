@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}
+    {% if post.title %}
+        {{ post.title }}
+    {% endif %}
+{% endblock title %}
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Post Content Column -->
+            <div class="col-lg-12">
+                <!-- Title -->
+                {% if post.title %}
+                    <h1 class="mt-4">{{ post.title }}</h1>
+                {% endif %}
+                <!-- Author -->
+                {% if post.author %}
+                    <p class="lead">
+                        by
+                        <a href="#">{{ post.author }}</a>
+                    </p>
+                {% endif %}
+                <hr>
+                <!-- Date/Time -->
+                {% if post.created %}
+                    <p>Опубликовано {{ post.created }}</p>
+                {% endif %}
+                <hr>
+                <!-- Preview Image -->
+                {% if post.thumbnail %}
+                    <div class="text-center">
+                        <img class="img-fluid rounded" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+                    </div>
+                {% endif %}
+                <hr>
+                <!-- Post Content -->
+                {% if post.content %}
+                    {{ post.content }}
+                {% endif %}
+                <hr>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+{% endblock content %}

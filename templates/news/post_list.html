@@ -20,7 +20,7 @@
                             {% if post.content %}
                                 <p class="card-text">{{ post.content | truncatewords:50 | safe }}</p>
                             {% endif %}
-                            <a href="#" class="btn btn-primary">Read More &rarr;</a>
+                            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
                         </div>
                         <div class="card-footer text-muted">
                             {% if post.created %}
