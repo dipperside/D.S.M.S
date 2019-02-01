@@ -1,16 +1,27 @@
-from django.contrib.auth.models import User
+import uuid
+
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.db import models
+from django.urls import reverse
+
+from DSMS.utils import unique_slug_generator
+
+User = get_user_model()
 
 
 class Post(models.Model):
     """Новость"""
-    user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.SET_NULL, null=True)
     title = models.CharField("Заголовок", max_length=150)
-    text = models.TextField("Текст статьи")
-    date = models.DateTimeField("Дата", auto_now_add=True)
-    sites = models.ManyToManyField(Site)
-
+    slug = models.SlugField("Слаг", max_length=150, unique=True, default=uuid.uuid4)
+    thumbnail = models.ImageField("Риссунок", upload_to='posts/%Y/%m/%d')
+    published = models.BooleanField("Опубликовано", default=False)
+    created = models.DateTimeField("Создана", auto_now_add=True)
+    modified = models.DateTimeField("Обновлена", auto_now=True)
+    sites = models.ManyToManyField(Site, verbose_name="Сайт")
+    content = RichTextUploadingField("Контент")
 
     class Meta:
         verbose_name = "Новость"
@@ -18,3 +29,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("news:post_detail", kwargs={"slug": self.slug})
+
+    def save(self, *args, **kwargs):
+        self.slug = unique_slug_generator(self, self.title)
+        super(Post, self).save(*args, **kwargs)

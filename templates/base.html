@@ -9,7 +9,9 @@
 </head>
 <body>
 <div class="container-fluid">
-    {% include 'base/menu.html' %}
+    <div class="row">
+        {% include 'base/menu.html' %}
+    </div>
     <div class="row">
         {% block content %}
         {% endblock content %}
