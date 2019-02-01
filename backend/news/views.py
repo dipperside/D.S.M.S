@@ -1,16 +1,28 @@
-from django.http import Http404, HttpResponse
-from django.shortcuts import render
-from django.contrib.sites.shortcuts import get_current_site
-from django.views.generic.base import View
+from django.views.generic import ListView, DetailView
+from django.http import Http404
 
-from .models import Post
+from backend.news.models import Post
 
 
-class PostList(View):
-    """Вывод списка новостей"""
-    def get(self, request):
-        try:
-            a = Post.objects.filter(sites__id=get_current_site(request).id)
-        except Post.DoesNotExist:
-            raise Http404("Article does not exist on this site")
-        return HttpResponse(a)
+class PostList(ListView):
+
+    model = Post
+    paginate_by = 10
+    template_name = 'news/post_list.html'
+
+    def get_queryset(self):
+        queryset = super(PostList, self).get_queryset()
+        return queryset.filter(published=True)
+
+
+class PostDetailView(DetailView):
+
+    model = Post
+    template_name = 'news/post_detail.html'
+
+    def get_object(self, queryset=None):
+        object = super(PostDetailView, self).get_object(queryset)
+        if object.published:
+            return object
+        else:
+            raise Http404("Пост не найден!")
