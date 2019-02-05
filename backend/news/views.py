@@ -5,7 +5,7 @@ from backend.news.models import Post
 
 
 class PostList(ListView):
-
+    """Вывод списока новостей"""
     model = Post
     paginate_by = 10
     template_name = 'news/post_list.html'
@@ -16,7 +16,7 @@ class PostList(ListView):
 
 
 class PostDetailView(DetailView):
-
+    """Вывод новвости"""
     model = Post
     template_name = 'news/post_detail.html'
 
