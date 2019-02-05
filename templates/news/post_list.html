@@ -15,9 +15,7 @@
                                  alt="{{ post.title }}">
                         {% endif %}
                         <div class="card-body">
-                            {% if post.title %}
-                                <h2 class="card-title">{{ post.title }}</h2>
-                            {% endif %}
+                            <h2 class="card-title">{{ post.title }}</h2>
                             {% if post.content %}
                                 <p class="card-text">{{ post.content | truncatewords:50 | safe }}</p>
                             {% endif %}
@@ -25,12 +23,8 @@
                                 &rarr;</a>
                         </div>
                         <div class="card-footer text-muted">
-                            {% if post.created %}
-                                {{ post.created }}
-                            {% endif %}
-                            {% if post.author %}
-                                <a href="#">{{ post.author }}</a>
-                            {% endif %}
+                            {{ post.created }}
+                            <a href="#">{{ post.author }}</a>
                         </div>
                     {% endfor %}
                     <!-- Pagination -->
