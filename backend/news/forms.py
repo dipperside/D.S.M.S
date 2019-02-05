@@ -5,6 +5,7 @@ from backend.news.models import Post
 
 
 class PostAdminForm(forms.ModelForm):
+    """Форма новости"""
     content = forms.CharField(widget=CKEditorUploadingWidget(), label="Контент")
 
     class Meta:

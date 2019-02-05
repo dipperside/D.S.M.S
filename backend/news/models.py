@@ -20,7 +20,7 @@ class Post(models.Model):
         null=True)
     title = models.CharField("Заголовок", max_length=150)
     slug = models.SlugField("Слаг", max_length=150, unique=True, default=uuid.uuid4)
-    thumbnail = models.ImageField("Риссунок", upload_to='posts/%Y/%m/%d')
+    thumbnail = models.ImageField("Риссунок", upload_to='posts/%Y/%m/%d', blank=True)
     published = models.BooleanField("Опубликовано", default=False)
     created = models.DateTimeField("Создана", auto_now_add=True)
     modified = models.DateTimeField("Обновлена", auto_now=True)
