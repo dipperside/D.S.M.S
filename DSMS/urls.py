@@ -12,6 +12,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('news/', include('backend.news.urls')),
     path('page/', include('backend.pages.urls')),
+    path('', include('backend.menu.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

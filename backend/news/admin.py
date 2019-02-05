@@ -10,7 +10,7 @@ class PostAdmin(admin.ModelAdmin):
     model = Post
     form = PostAdminForm
     
-    list_display = ["title", "author", "created", "published"]
+    list_display = ["title", "author", "created", "published", "id"]
     list_editable = ["published", ]
     search_fields = ["title", ]
     list_filter = ["author", "published", ]
