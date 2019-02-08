@@ -4,7 +4,7 @@
             {% if item.url %}
                 <a href="{{ item.url }}">{{ item.title }}</a>
             {% else %}
-                <a href="{% url 'menu_link' slug=item.link %}">{{ item.title }}</a>
+                <a href="{{ item.content_object.get_absolute_url }}">{{ item.title }}</a>
             {% endif %}
         </li>
     {% endfor %}
