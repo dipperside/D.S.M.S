@@ -33,7 +33,6 @@ class MenuItem(MPTTModel):
     menu = models.ForeignKey(Menu, verbose_name="Меню", on_delete=models.CASCADE)
     status = models.BooleanField("Только для зарегистрированных", default=False)
     url = models.CharField("Ссылка на внешний ресурс", max_length=100, null=True, blank=True)
-    link = models.SlugField("URL", unique=True, max_length=500, null=True, blank=True)
 
     content_type = models.ForeignKey(
         ContentType,

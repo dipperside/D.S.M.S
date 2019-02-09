@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 from DSMS.utils import unique_slug_generator
 
@@ -23,7 +24,7 @@ class Post(models.Model):
     thumbnail = models.ImageField("Риссунок", upload_to='posts/%Y/%m/%d', blank=True)
     published = models.BooleanField("Опубликовано", default=False)
     created = models.DateTimeField("Создана", auto_now_add=True)
-    modified = models.DateTimeField("Обновлена", auto_now=True)
+    modified = models.DateTimeField("Обновлена", default=timezone.now)
     sites = models.ManyToManyField(Site, verbose_name="Сайт")
     content = RichTextUploadingField("Контент", default="")
 
