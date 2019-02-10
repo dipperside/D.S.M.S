@@ -5,22 +5,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="my-4">Новости</h1>
+                <h1 class="my-auto">Новости</h1>
                 {% if object_list.exists %}
                     {% for post in post_list %}
                         <!-- Post -->
-                        <div class="card mb-4">
                         {% if post.thumbnail %}
-                            <img class="img-responsive" src="{{ post.thumbnail.url }}"
-                                 alt="{{ post.title }}">
+                        <div class="img-thumbnail rounded mb-4">
+                            <img class="img-fluid" src="{{ post.thumbnail.url }}"
+                            alt="{{ post.title }}">
+                        </div>
                         {% endif %}
                         <div class="card-body">
                             <h2 class="card-title">{{ post.title }}</h2>
                             {% if post.content %}
                                 <p class="card-text">{{ post.content | truncatewords:50 | safe }}</p>
                             {% endif %}
-                            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More
-                                &rarr;</a>
+                            <a href="{{ post.get_absolute_url }}" class="btn btn-sm btn-primary">
+                                Read More <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
                         </div>
                         <div class="card-footer text-muted">
                             {{ post.created }}

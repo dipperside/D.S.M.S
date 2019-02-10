@@ -1,11 +1,17 @@
+{% load mptt_tags %}
 <ul>
-    {% for item in items %}
-        <li>
-            {% if item.url %}
-                <a href="{{ item.url }}">{{ item.title }}</a>
-            {% else %}
-                <a href="{{ item.content_object.get_absolute_url }}">{{ item.title }}</a>
-            {% endif %}
-        </li>
-    {% endfor %}
+    {% recursetree items %}
+            <li>
+                {% if node.url %}
+                    <a href="{{ node.url }}">{{ node.title }}</a>
+                {% else %}
+                    <a href="{{ node.content_object.get_absolute_url }}">{{ node.title }}</a>
+                {% endif %}
+                {% if not node.is_leaf_node %}
+                    <ul class="children">
+                        {{ children }}
+                    </ul>
+                {% endif %}
+            </li>
+    {% endrecursetree %}
 </ul>
