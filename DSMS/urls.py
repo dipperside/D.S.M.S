@@ -12,9 +12,9 @@ urlpatterns = [
     path('jet/', include('jet.urls', 'jet')),
     path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('admin/', admin.site.urls),
-    path('jet_api/', include(jet_urls)),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('accounts/', include('allauth.urls')),
+
     path('news/', include('backend.news.urls')),
     path('', include('backend.pages.urls')),
     # path('', include('backend.menu.urls')),

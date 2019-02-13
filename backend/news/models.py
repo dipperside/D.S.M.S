@@ -12,6 +12,42 @@ from DSMS.utils import unique_slug_generator
 User = get_user_model()
 
 
+class Category(models.Model):
+    """Категории"""
+    name = models.CharField("Название", max_length=100)
+    parent = models.ForeignKey(
+        'self',
+        verbose_name="Род. категория",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    slug = models.SlugField("url", max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("post_list", kwargs={"slug": self.slug})
+
+
+class Tags(models.Model):
+    """Теги"""
+    name = models.CharField("Название", max_length=100)
+    slug = models.SlugField("url", max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = "Тег"
+        verbose_name_plural = "Теги"
+
+    def __str__(self):
+        return self.name
+
+
 class Post(models.Model):
     """Новость"""
     author = models.ForeignKey(
@@ -28,6 +64,9 @@ class Post(models.Model):
     sites = models.ManyToManyField(Site, verbose_name="Сайт")
     content = RichTextUploadingField("Контент", default="")
 
+    category = models.ManyToManyField(Category, verbose_name="Категория")
+    tag = models.ManyToManyField(Tags, verbose_name="Теги")
+
     class Meta:
         verbose_name = "Новость"
         verbose_name_plural = "Новости"
@@ -36,7 +75,13 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("news:post_detail", kwargs={"slug": self.slug})
+        return reverse(
+            "news:post_detail",
+            kwargs={
+                 "category": self.category.first().slug,
+                 "slug": self.slug
+            }
+        )
 
     def save(self, *args, **kwargs):
         self.slug = unique_slug_generator(self, self.title)
