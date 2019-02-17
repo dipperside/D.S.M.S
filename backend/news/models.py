@@ -32,7 +32,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("post_list", kwargs={"slug": self.slug})
+        return reverse("news:post_list", kwargs={"slug": self.slug})
 
 
 class Tags(models.Model):

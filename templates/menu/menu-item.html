@@ -15,3 +15,15 @@
             </li>
     {% endrecursetree %}
 </ul>
+
+{#<ul>#}
+{#    {% for item in items %}#}
+{#        <li>#}
+{#            {% if item.url %}#}
+{#                <a href="{{ item.url }}">{{ item.title }}</a>#}
+{#            {% else %}#}
+{#                <a href="{{ item.content_object.get_absolute_url }}">{{ item.title }}</a>#}
+{#            {% endif %}#}
+{#        </li>#}
+{#    {% endfor %}#}
+{#</ul>#}

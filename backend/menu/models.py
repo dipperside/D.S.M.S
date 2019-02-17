@@ -34,7 +34,9 @@ class MenuItem(MPTTModel):
     status = models.BooleanField("Только для зарегистрированных", default=False)
     url = models.CharField("Ссылка на внешний ресурс", max_length=100, null=True, blank=True)
 
-    limit = models.Q(app_label="news", model="Category") | models.Q(app_label="pages", model="Pages")
+    limit = models.Q(app_label="news", model="category") | models.Q(app_label="pages", model="pages")
+    # limit = models.Q(app_label="news", model="category")
+    print(f"limit={limit}")
 
     content_type = models.ForeignKey(
         ContentType,

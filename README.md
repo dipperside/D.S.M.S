@@ -9,15 +9,10 @@ Postgres == 10
 **Установка**
 - Форкнуть проект
 
-- Создать файл local_settings.py и прописать
+- Переименовать local_settings.sample.py в local_settings.py 
+и прописать в нем:
 
 ```
-from .settings import *
-
-SECRET_KEY = 'ddfdrrt545*^g*&76r*B8f^5e64d9y&()HJ0yu97T&%%7t'
-
-DEBUG = True
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -50,9 +45,7 @@ SITE_ID = 1
 стандартный функционал, 
 юзер регается размещает объявленние с указанием его актуальности 
 предположи \день\неделя\месяц\год осле чего авто удаление, 
-коментарии, 
-оповешения
-)
+коментарии, оповешения)
 
 ## Идеи
 
