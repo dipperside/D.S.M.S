@@ -11,8 +11,11 @@ class PostList(ListView):
     template_name = 'news/post_list.html'
 
     def get_queryset(self):
-        queryset = super(PostList, self).get_queryset()
-        return queryset.filter(published=True)
+        posts = Post.objects.filter(category__slug=self.kwargs.get("slug"))
+        if posts.exists():
+            return posts
+        else:
+            raise Http404
 
 
 class PostDetailView(DetailView):
