@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'backend.pages',
     'backend.news',
     'backend.menu',
+    'backend.comments',
 ]
 
 MIDDLEWARE = [
