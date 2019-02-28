@@ -1,6 +1,6 @@
-from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 from django.utils import timezone
 
@@ -15,7 +15,7 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
         null=True)
     post = models.ForeignKey("news.Post", verbose_name="Новость", on_delete=models.CASCADE)
-    message = RichTextField("Сообщение", default="")
+    message = TextField("Сообщение", default="")
     created = models.DateTimeField("Создан", auto_now_add=True)
     updated = models.DateTimeField("Обновлен", default=timezone.now)
     reply = models.ForeignKey(
@@ -32,3 +32,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.id}-{self.author}"
+
+    def get_absolute_url(self):
+        # from django.core.urlresolvers import reverse
+        return reverse('people.views.details', args=[str(self.id)])

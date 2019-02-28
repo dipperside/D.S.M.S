@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.http import Http404
+from django.views.generic.base import View
 
 from backend.news.models import Post
 
@@ -29,3 +30,8 @@ class PostDetailView(DetailView):
             return object
         else:
             raise Http404("Пост не найден!")
+
+
+class AddComment(View):
+    def get(self, request, *args, **kwargs):
+        pass
