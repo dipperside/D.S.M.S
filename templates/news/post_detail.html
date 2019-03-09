@@ -31,6 +31,16 @@
                 <!-- Post Content -->
                 {{ post.content|safe }}
                 <hr>
+                {%  if post.comments.exists %}
+                <h4>Комменты:</h4>
+                    <ul>
+                    {%  for comment in post.comments.all %}
+                        {% if not comment.reply %}
+                            {% include "comment/tree_comment.html" %}
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
         </div>
         <!-- /.row -->

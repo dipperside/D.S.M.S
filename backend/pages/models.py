@@ -23,6 +23,3 @@ class Pages(models.Model):
             return reverse("page", kwargs={"slug": self.slug})
         else:
             return reverse("page")
-
-
-

@@ -2,4 +2,5 @@ from django.apps import AppConfig
 
 
 class LendingConfig(AppConfig):
-    name = 'pages'
+    name = 'backend.pages'
+    verbose_name = "Страници"

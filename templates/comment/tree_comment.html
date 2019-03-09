@@ -1,0 +1,23 @@
+<li>{{ comment.id }} :: {{ comment.message }}
+    {%if comment.children %}
+        <ul>
+         {% for ch in comment.children.get_queryset %}     {# related_name in model#}
+              {% with comment=ch template_name="comment/tree_comment.html" %}
+                   {% include template_name %}
+              {% endwith %}
+         {% endfor %}
+         </ul>
+    {% endif %}
+</li>
+
+{#<li> {{ p.id }}::{{ p.message }}#}
+{#  {% if p.children %}#}
+{#    <ul>#}
+{#        {% for sub in p.children.get_queryset %}#}
+{#        <li>#}
+{#            {{ sub.message }}#}
+{#        </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#  {% endif %}#}
+{#</li>#}

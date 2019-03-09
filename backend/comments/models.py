@@ -14,25 +14,27 @@ class Comment(models.Model):
         verbose_name="Автор",
         on_delete=models.CASCADE,
         null=True)
-    post = models.ForeignKey("news.Post", verbose_name="Новость", on_delete=models.CASCADE)
-    message = TextField("Сообщение", default="")
-    created = models.DateTimeField("Создан", auto_now_add=True)
-    updated = models.DateTimeField("Обновлен", default=timezone.now)
+    post = models.ForeignKey("news.Post", verbose_name="Новость", on_delete=models.CASCADE, related_name="comments")
+    message = models.TextField("Сообщение", default="")
     reply = models.ForeignKey(
         "self",
         verbose_name="Коммент",
         on_delete=models.SET_NULL,
         blank=True,
-        null=True
+        null=True,
+        related_name='children'
     )
+    created = models.DateTimeField("Создан", auto_now_add=True)
+    updated = models.DateTimeField("Обновлен", default=timezone.now)
 
     class Meta:
         verbose_name = "Комментарий",
         verbose_name_plural = "Комментарии"
+        ordering = ['id']
 
     def __str__(self):
-        return f"{self.id}-{self.author}"
+        # return f"{self.id}-{self.author}"
+        return f"{self.id}-{self.post}"
 
     def get_absolute_url(self):
-        # from django.core.urlresolvers import reverse
-        return reverse('people.views.details', args=[str(self.id)])
+        return reverse('news:add_comment', args=[str(self.id)])
