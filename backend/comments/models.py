@@ -5,16 +5,20 @@ from django.urls import reverse
 from django.utils import timezone
 
 
-# Create your models here.
-
 class Comment(models.Model):
     """ Комментарий """
     author = models.ForeignKey(
         User,
         verbose_name="Автор",
         on_delete=models.CASCADE,
-        null=True)
-    post = models.ForeignKey("news.Post", verbose_name="Новость", on_delete=models.CASCADE, related_name="comments")
+        null=True
+    )
+    post = models.ForeignKey(
+        "news.Post",
+        verbose_name="Новость",
+        on_delete=models.CASCADE,
+        related_name="comments"
+    )
     message = models.TextField("Сообщение", default="")
     reply = models.ForeignKey(
         "self",
@@ -22,7 +26,7 @@ class Comment(models.Model):
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name='children'
+        related_name='children',
     )
     created = models.DateTimeField("Создан", auto_now_add=True)
     updated = models.DateTimeField("Обновлен", default=timezone.now)
@@ -34,7 +38,7 @@ class Comment(models.Model):
 
     def __str__(self):
         # return f"{self.id}-{self.author}"
-        return f"{self.id}-{self.post}"
+        return f"{self.id}-{self.post} > {self.message[:20]}..."
 
-    def get_absolute_url(self):
-        return reverse('news:add_comment', args=[str(self.id)])
+    # def get_absolute_url(self):
+    #     return reverse('news:add_comment', args=[str(self.id)])
