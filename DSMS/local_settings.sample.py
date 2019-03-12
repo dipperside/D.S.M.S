@@ -10,6 +10,7 @@ MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
 THUMBNAIL_DEBUG = True
 
+# The Debug Toolbar is shown only if your IP is listed in the INTERNAL_IPS setting.
 INTERNAL_IPS = ["127.0.0.1", "0.0.0.1"]
 
 # define your databases here
