@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -15,10 +16,12 @@
         {% include 'base/menu.html' %}
     </div>
     <div class="row">
-        <div class="col-2">
-            {% menu_item 'head' %}
+        <div class="col-2 my-md-3">
+            {% block side_bar %}
+                <strong>Котехорийы</strong>
+            {% endblock %}
         </div>
-        <div class="col-10">
+        <div class="col-10 my-md-3">
             {% block content %}
             {% endblock content %}
         </div>

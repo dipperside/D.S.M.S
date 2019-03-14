@@ -13,14 +13,12 @@
                 <!-- Title -->
                 <h1 class="mt-4">{{ post.title }}</h1>
                 <!-- Author -->
-                <p class="lead">
-                    by
-                    <a href="#">{{ post.author }}</a>
-                </p>
-                <hr>
+                <h5 class="p-3 mb-2 bg-light text-dark">
+                    by <a href="#" class="badge badge-dark">{{ post.author }}</a>
+                </h5>
+{#                <hr>#}
                 <!-- Date/Time -->
-                <p>Опубликовано {{ post.created }}</p>
-                <hr>
+                <p class="font-weight-bold p-1 mb-1 border-bottom">Опубликовано: <span class="font-weight-light"> {{ post.created }}</span></p>
                 <!-- Preview Image -->
                 {% if post.thumbnail %}
                     <div class="text-center">

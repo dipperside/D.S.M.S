@@ -1,14 +1,14 @@
 {% load mptt_tags %}
-<ul>
+<ul class="nav">
     {% recursetree items %}
-            <li>
+            <li class="nav-item">
                 {% if node.url %}
-                    <a href="{{ node.url }}">{{ node.title }}</a>
+                    <a class="nav-link" href="{{ node.url }}">{{ node.title }}</a>
                 {% else %}
-                    <a href="{{ node.content_object.get_absolute_url }}">{{ node.title }}</a>
+                    <a class="nav-link" href="{{ node.content_object.get_absolute_url }}">{{ node.title }}</a>
                 {% endif %}
                 {% if not node.is_leaf_node %}
-                    <ul class="children">
+                    <ul class="nav-item children">
                         {{ children }}
                     </ul>
                 {% endif %}
