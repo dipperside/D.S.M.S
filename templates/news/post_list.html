@@ -1,5 +1,25 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
+
 {% block title %}Новости{% endblock title %}
+
+{% block side_bar %}
+    <div class="container">
+        -- КОТЕХОРИЙИ --
+        <div id="navigation-block">
+            <ul id="sliding-navigation">
+                <img src="{% static '/img/sidebar/background.jpg'%}" id="hide">
+                <li class="sliding-element"><h3 class="font-weight-normal">Navigation Title</h3></li>
+                <li class="sliding-element"><a href="#">Link 1</a></li>
+                <li class="sliding-element"><a href="#">Link 2</a></li>
+                <li class="sliding-element"><a href="#">Link 3</a></li>
+                <li class="sliding-element"><a href="#">Link 4</a></li>
+                <li class="sliding-element"><a href="#">Link 5</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock side_bar %}
+
 {% block content %}
     <!-- Page Content -->
     <div class="container">
@@ -24,6 +44,7 @@
                                 Read More <span class="glyphicon glyphicon-chevron-right"></span>
                             </a>
                         </div>
+
                         <div class="card-footer text-muted">
                             {{ post.created }}
                             <a href="#">{{ post.author }}</a>
@@ -39,7 +60,6 @@
                 </div>
             </div>
             <!-- /.row -->
-        </div>
     </div>
     <!-- /.container -->
 {% endblock content %}
