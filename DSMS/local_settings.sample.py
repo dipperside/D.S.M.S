@@ -21,4 +21,5 @@ DATABASES = {
     }
 }
 
+
 SITE_ID = 1

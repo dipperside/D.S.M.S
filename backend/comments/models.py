@@ -30,6 +30,7 @@ class Comment(models.Model):
     )
     created = models.DateTimeField("Создан", auto_now_add=True)
     updated = models.DateTimeField("Обновлен", default=timezone.now)
+    moderated = models.BooleanField("Одобрен", default=False)
 
     class Meta:
         verbose_name = "Комментарий",

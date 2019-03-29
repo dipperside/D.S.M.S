@@ -23,3 +23,13 @@ class Pages(models.Model):
             return reverse("page", kwargs={"slug": self.slug})
         else:
             return reverse("page")
+
+
+class PageHit(models.Model):
+    """page hit"""
+    url = models.CharField("URL", max_length=300)
+    hit_count = models.PositiveIntegerField("Визиты", default=0)
+
+    class Meta:
+        verbose_name = "Визит страницы"
+        verbose_name_plural = "Визиты страницы"
