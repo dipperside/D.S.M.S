@@ -1,7 +1,5 @@
-from django.core.cache import cache
 from django.http import Http404
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import FormMixin
 
 from backend.news.models import Post
 from backend.pages.models import PageHit
@@ -16,13 +14,19 @@ class PostList(ListView):
 
     def get_queryset(self):
         if self.kwargs.get("slug"):
-            posts = Post.objects.filter(category__slug=self.kwargs.get("slug"))
+            posts = Post.objects.filter(category__slug=self.kwargs.get("slug")).filter(published=True)
         else:
             posts = Post.objects.filter(published__exact=True)
         if posts.exists():
             return posts
         else:
-            raise Http404
+            raise Http404("Нет тут постов пока...")
+
+    def get_context_data(self, **kwargs):
+        context = super(PostList, self).get_context_data(**kwargs)
+        context['category'] = Category.objects.filter(parent=None).order_by("name")
+        pprint(f'{context["category"]}')
+        return context
 
 
 class PostDetailView(FormMixin, DetailView):

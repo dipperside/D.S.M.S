@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'bootstrap4',
 
     'mptt',
+    'easy_thumbnails',
+    'crispy_forms',
 
     # auth
     'allauth',
@@ -60,6 +62,7 @@ INSTALLED_APPS = [
     'backend.news',
     'backend.menu',
     'backend.comments',
+    'backend.profiles',
 ]
 
 MIDDLEWARE = [
