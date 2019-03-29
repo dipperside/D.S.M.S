@@ -8,6 +8,7 @@ from backend.news.forms import PostAdminForm
 class CategoryAdmin(admin.ModelAdmin):
     """Категрии"""
     list_display = ("name", "id")
+    list_filter =  ("name", "parent")
     prepopulated_fields = {"slug": ("name", )}
 
 

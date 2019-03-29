@@ -7,22 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/glyphicon.css' %}">
-    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="shortcut icon" href="{% static '/img/favicon-32x32.png' %}" type="image/png"/>
 </head>
 <body>
+<!-- top navbar -->
 <div class="container-fluid">
     <div class="row">
         {% include 'base/menu.html' %}
     </div>
+</div>
+<!-- main content -->
+<div class="container-fluid">
     <div class="row">
-        <div class="col-2 my-md-3">
-            {% block side_bar %}
+        {% block side_bar %}
+            <div class="col-3 my-md-3">
                 <strong>Котехорийы</strong>
-            {% endblock %}
-        </div>
-        <div class="col-10 my-md-3">
+            </div>
+        {% endblock %}
+        <div class="col-8 my-md-3">
             {% block content %}
             {% endblock content %}
         </div>

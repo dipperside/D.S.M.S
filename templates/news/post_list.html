@@ -4,25 +4,35 @@
 {% block title %}Новости{% endblock title %}
 
 {% block side_bar %}
-    <div class="container">
-        -- КОТЕХОРИЙИ --
-        <div id="navigation-block">
-            <ul id="sliding-navigation">
-                <img src="{% static '/img/sidebar/background.jpg'%}" id="hide">
-                <li class="sliding-element"><h3 class="font-weight-normal">Navigation Title</h3></li>
-                <li class="sliding-element"><a href="#">Link 1</a></li>
-                <li class="sliding-element"><a href="#">Link 2</a></li>
-                <li class="sliding-element"><a href="#">Link 3</a></li>
-                <li class="sliding-element"><a href="#">Link 4</a></li>
-                <li class="sliding-element"><a href="#">Link 5</a></li>
-            </ul>
-        </div>
+    <div class="col-3 my-md-3">
+        -- КОТЕХОРИЙИ -- 
+        {% if user.is_authenticated %}<br>ЮЗЕР ->>> {{ user }}
+        {% else %}
+            <img src="https://image.flaticon.com/icons/png/128/843/843280.png" alt="anonymous" title="anonymous"
+                 class="rounded-circle img-thumbnail" width="50px">
+        {% endif %}
+        {#        <div class="container">#}
+            <div id="navigation-block">
+                <ul id="sliding-navigation">
+                    <img src="{% static '/img/sidebar/background.jpg' %}" id="hide">
+                    <li class="sliding-element"><h3 class="h5">Котехорийы</h3></li>
+                    {% for item in category %}
+                        <li class="sliding-element">
+                            <a href="{{ item.get_absolute_url }}" title="{{ item.name }}">
+                                {{ item.name|truncatechars_html:20 }}
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+{#        </div>#}
     </div>
 {% endblock side_bar %}
 
 {% block content %}
     <!-- Page Content -->
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <h1 class="my-auto">Новости</h1>
@@ -30,10 +40,10 @@
                     {% for post in post_list %}
                         <!-- Post -->
                         {% if post.thumbnail %}
-                        <div class="img-thumbnail rounded mb-4">
-                            <img class="img-thumbnail" src="{{ post.thumbnail.url }}"
-                            alt="{{ post.title }}">
-                        </div>
+                            <div class="img-thumbnail rounded mb-4">
+                                <img class="img-thumbnail" src="{{ post.thumbnail.url }}"
+                                     alt="{{ post.title }}">
+                            </div>
                         {% endif %}
                         <div class="card-body">
                             <h2 class="card-title">{{ post.title }}</h2>
@@ -47,7 +57,7 @@
 
                         <div class="card-footer text-muted">
                             {{ post.created }}
-                            <a href="#">{{ post.author }}</a>
+                            <a href="{% url 'profiles:show' post.author.profile.slug %}">{{ post.author }} </a>&#8227; {{ post.category.first }}
                         </div>
                     {% endfor %}
                     <!-- Pagination -->
@@ -57,9 +67,10 @@
                 {% else %}
                     <h2>Еще новостей нет!</h2>
                 {% endif %}
-                </div>
             </div>
-            <!-- /.row -->
+        </div>
+        <!-- /.row -->
     </div>
     <!-- /.container -->
+    CONTEXT ->> {{ object_list }}
 {% endblock content %}
