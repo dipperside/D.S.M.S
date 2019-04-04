@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% load staticfiles %}
-{% load crispy_forms_tags %}
+{#{% load crispy_forms_tags %}#}
 {% load thumbnail %}
 
 {% block title %}{{ block.super }}Profile{% endblock %}
@@ -23,13 +23,15 @@
         <img title="profile picture" class="img-circle img-responsive" src="{% thumbnail user.profile.picture|default:'default_profile.png' 140x140 crop %}">
       </div>
     </div>
-      
+
     <!-- edit form column -->
     <div class="col-md-9">
       <h3>Personal info</h3>
       <form enctype="multipart/form-data" method="post">
-	{% crispy user_form %}
-	{% crispy profile_form %}
+{#	{% crispy user_form %}#}
+{#	{% crispy profile_form %}#}
+	{{ user_form }}
+	{{ profile_form }}
       </form>
     </div>
   </div>

@@ -24,7 +24,7 @@ SECRET_KEY = 'j*dz()3@h$o6@f*&ipn7$-%n&u54hh7gbe7!$d+loib-)*qo1*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '*']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -51,18 +51,17 @@ INSTALLED_APPS = [
 
     'mptt',
     'easy_thumbnails',
-    'crispy_forms',
 
     # auth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
 
-    'backend.pages',
-    'backend.news',
-    'backend.menu',
-    'backend.comments',
-    'backend.profiles',
+    'backend.pages.apps.LendingConfig',
+    'backend.news.apps.NewsConfig',
+    'backend.menu.apps.MenuConfig',
+    'backend.comments.apps.CommentsConfig',
+    'backend.profiles.apps.ProfileConfig',
 ]
 
 MIDDLEWARE = [

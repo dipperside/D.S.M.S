@@ -1,5 +1,5 @@
 import uuid
-from django.conf import settings
+
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -8,7 +8,7 @@ User = get_user_model()
 
 class BaseProfile(models.Model):
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.CASCADE,
         primary_key=True
     )
@@ -27,4 +27,4 @@ class BaseProfile(models.Model):
 
 class Profile(BaseProfile):
     def __str__(self):
-        return "Профиль {}-а".format(self.user.username)
+        return self.user.username
